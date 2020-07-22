@@ -30,6 +30,7 @@ int main(void) {
 	base64c_tests(suite);
 
 	SRunner *runner = srunner_create(suite);
+	srunner_set_tap(runner, "/dev/stdout");
 	if (getenv("VALGRIND")) // Do not fork with valgrind
 		srunner_set_fork_status(runner, CK_NOFORK);
 

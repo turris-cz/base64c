@@ -126,7 +126,6 @@ size_t base64_encode(const uint8_t *input, size_t len, char *output) {
 	for (size_t i = 0; i < len; i++) {
 		dt |= input[i] << (8 * (2 - (i % 3)));
 		if ((i + 1) % 3 == 0) {
-			printf("we have %08x\n", dt);
 			for (int f = 18; f >= 0; f -= 6)
 				output[j++] = b64char[(dt >> f) & 0x3f];
 			dt = 0;

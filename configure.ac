@@ -1,5 +1,6 @@
 AC_INIT([base64c], [0.1.0], [packaging@turris.cz])
 AC_CONFIG_MACRO_DIRS([m4])
+AC_CONFIG_AUX_DIR([aux])
 
 AM_INIT_AUTOMAKE([foreign silent-rules subdir-objects -Wall -Wno-portability])
 AM_SILENT_RULES([yes])
@@ -16,6 +17,7 @@ AC_ARG_ENABLE([tests], AC_HELP_STRING([--disable-tests], [Disable tests]))
 AM_CONDITIONAL([ENABLE_TESTS], [test "x$enable_tests" != "xno"])
 AS_IF([test "x$enable_tests" != "xno"], [
   PKG_CHECK_MODULES([CHECK], [check >= 0.11])
+  AC_REQUIRE_AUX_FILE([tap-driver.sh])
 ])
 AX_VALGRIND_CHECK
 
