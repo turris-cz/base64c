@@ -1,0 +1,50 @@
+image: registry.labs.nic.cz/turris/base64c
+
+stages:
+  - build
+  - test
+
+## Build stage ###################################################################
+build:
+  stage: build
+  script:
+    - ./bootstrap
+    - ./configure --disable-tests --disable-valgrind --disable-linters
+    - make
+  artifacts:
+    when: on_failure
+    expire_in: 1 week
+    paths:
+    - config.log
+
+## Test stage ####################################################################
+.test:
+  stage: test
+  before_script:
+      - ./bootstrap
+      - ./configure
+
+.test-check:
+  extends: .test
+  artifacts:
+    when: on_failure
+    expire_in: 1 week
+    paths:
+    - 'test-suite*.log'
+    - 'tests/*/*.log'
+    - 'tests/*/*.trs'
+
+check:
+  extends: .test-check
+  script:
+    - make check
+
+valgrind:
+  extends: .test-check
+  script:
+    - make check-valgrind
+
+lint:
+  extends: .test
+  script:
+    - make lint
