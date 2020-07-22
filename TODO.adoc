@@ -1,0 +1,10 @@
+= To be done
+
+This is list of things we might want to do in this project.
+
+* Make implementation of padding and non-padding variant rigid in terms of
+  verification and decoding/encoding.
+* Add support for decoding non-encoding characters
+  * By discarting them
+  * By keeping them in place
+* Add logging using logc

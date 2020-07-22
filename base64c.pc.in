@@ -1,0 +1,10 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: base64c
+Description: Simple base64 implementation in C
+Version: %version%
+Libs: -L${libdir} -lbase64c
+Cflags: -I${includedir}

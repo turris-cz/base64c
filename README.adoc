@@ -1,0 +1,60 @@
+= Base64 encoding/decoding library for C (Base64C)
+CZ.NIC z.s.p.o. <packaging@turris.cz>
+v1.0, 2020-07-21
+:icons:
+
+This is simple library for base64 encoding and decoding. It is simply intended for
+that and nothing more. There are no dependencies. It is written using C11.
+
+Currently this library supports decoding of base64 strings with as well as without
+padding but can produce only strings with padding.
+
+
+== Compilation
+
+To compile this library you have to run:
+
+----
+ ./bootstrap
+ ./configure
+ make
+----
+
+Subsequent installation can be done with `make install`.
+
+
+== Usage
+
+To use this library you need to include pkg-config package `base64c` into your
+project. Then you can just include `base64c.h` header.
+
+Documentation and available API is for now documented only in header itself.
+Please read comments in header.
+
+
+== Running tests
+
+Base64C contains basic tests in directory tests. To run all tests you can just simply
+run:
+
+----
+ make check
+----
+
+You can also run tests with Valgrind:
+
+----
+ make check-valgrind
+----
+
+To run checks with just one specific Valgrind test such as memtest you can run:
+
+----
+ make check-valgrind-memcheck
+----
+
+Source code of project can be also linted with cppcheck by running:
+
+----
+ make lint
+----
