@@ -1,4 +1,4 @@
-AC_INIT([base64c], [0.1.0], [cynerd@email.cz])
+AC_INIT([base64c], [0.1.0], [packaging@turris.cz])
 AC_CONFIG_MACRO_DIRS([m4])
 
 AM_INIT_AUTOMAKE([foreign silent-rules subdir-objects -Wall -Wno-portability])
