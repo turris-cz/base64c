@@ -36,22 +36,19 @@ static size_t padding(const char *input, size_t len) {
 	return input[len - 1] == '=' ? (input[len - 2] == '=' ? 2 : 1) : 0;
 }
 
-size_t base64_valid(const char *input, size_t len) {
+size_t base64_verify(const char *input, size_t len) {
 	if (len == 1)
-		return 0; // One character is invalid not matter what character it is
+		return 1; // One character is invalid not matter what character it is
 
 	for (size_t i = 0; i < (len - padding(input, len)); i++)
 		if (!is_valid_char(input[i]))
-			return i;
+			return i + 1;
 
-	return len;
+	return 0;
 }
 
-bool base64_str_valid(const char *input) {
-	size_t len = strlen(input);
-	if (len == 0) // Special case that is valid
-		return true;
-	return base64_valid(input, len);
+size_t base64_str_verify(const char *input) {
+	return base64_verify(input, strlen(input));
 }
 
 size_t base64_decode_len(const char *input, size_t len) {

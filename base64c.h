@@ -27,13 +27,11 @@
 // Verifies that provided input string is validly encoded in base64 format
 // input: string to be verified
 // len: size of string (validating at most given number of bytes)
-// Returns len if valid or index of first invalid character.
-size_t base64_valid(const char *input, size_t len);
+// Returns 0 if valid or index+1 of first invalid character.
+size_t base64_verify(const char *input, size_t len);
 
-// Verify that provided input string is validly encoded in base64 format
-// input: null terminated string to be verified
-// Returns true if valid and false otherwise
-bool base64_str_valid(const char *input);
+// base64_verify variant that uses strlen to get legth of input string.
+size_t base64_str_verify(const char *input);
 
 // This function provides you with exact size of decoded output. Use this function
 // to allocate memory for output of base64c_decode.

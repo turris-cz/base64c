@@ -33,7 +33,7 @@ const char *b64_valid[] = {
 };
 
 START_TEST(valid_valids) {
-	ck_assert(base64_str_valid(b64_valid[_i]));
+	ck_assert(!base64_str_verify(b64_valid[_i]));
 }
 END_TEST
 
@@ -42,16 +42,16 @@ struct b64_invalid {
 	const char *str;
 	size_t error;
 } b64_invalid[] = {
-	{"=", 0},
-	{"a", 0},
-	{"z", 0},
-	{"/", 0},
-	{"aa+\\aa", 3},
+	{"=", 1},
+	{"a", 1},
+	{"z", 1},
+	{"/", 1},
+	{"aa+\\aa", 4},
 };
 
 START_TEST(valid_invalids) {
 	const char *str = b64_invalid[_i].str;
-	ck_assert_int_eq(b64_invalid[_i].error, base64_valid(str, strlen(str)));
+	ck_assert_int_eq(b64_invalid[_i].error, base64_verify(str, strlen(str)));
 }
 END_TEST
 
