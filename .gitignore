@@ -10,15 +10,19 @@ base64c-*.tar.gz
 base64c-*.tar.xz
 base64c-*.zip
 
-# Test outputs
-tests/unittests
-test-suite*.log
-tests/*.log
-tests/*.trs
-
-## Autotools
+# Autotools
 /.m4
 /.aux
+
+# Test outputs
+/tests/unittests
+test-suite*.log
+/tests/*.log
+/tests/*.trs
+# Code coverage
+*.gcno
+/base64c-*-coverage*
+
 # http://www.gnu.org/software/automake
 Makefile
 Makefile.in

@@ -22,8 +22,8 @@ AM_CONDITIONAL([ENABLE_TESTS], [test "x$enable_tests" = "xyes"])
 AS_IF([test "x$enable_tests" = "xyes"], [
   PKG_CHECK_MODULES([CHECK], [check >= 0.11])
   AC_REQUIRE_AUX_FILE([tap-driver.sh])
-  AX_VALGRIND_CHECK
 ])
+AX_VALGRIND_CHECK
 
 dnl Linters
 AC_ARG_ENABLE([linters], AC_HELP_STRING([--enable-linters], [Whether to enable code linting support (cppcheck)]))

@@ -3,13 +3,15 @@ image: registry.labs.nic.cz/turris/base64c
 stages:
   - build
   - test
+  - coverage
+  - release
 
 ## Build stage ###################################################################
 build:
   stage: build
   script:
     - ./bootstrap
-    - ./configure --disable-tests --disable-valgrind --disable-linters
+    - ./configure
     - make
   artifacts:
     when: on_failure
@@ -17,12 +19,25 @@ build:
     paths:
     - config.log
 
+dist:
+  stage: build
+  script:
+    - ./bootstrap
+    - ./configure
+    - make dist
+  artifacts:
+    expire_in: 1 month
+    paths:
+      - 'logc-*.tar.gz'
+      - 'logc-*.tar.xz'
+      - 'logc-*.zip'
+
 ## Test stage ####################################################################
 .test:
   stage: test
   before_script:
       - ./bootstrap
-      - ./configure
+      - ./configure --enable-tests --enable-valgrind --enable-linters
 
 .test-check:
   extends: .test
@@ -48,3 +63,22 @@ lint:
   extends: .test
   script:
     - make lint
+
+## Code Coverage stage ###########################################################
+coverage:
+  stage: coverage
+  needs: [check]
+  script:
+    - ./bootstrap
+    - ./configure --enable-tests --enable-code-coverage
+    - make check-code-coverage V=1
+    - mv 'base64c-*-coverage' 'base64c-coverage'
+  coverage: '/lines\.\.\.\.\.\.: (\d+.\d+%)/'
+  artifacts:
+    expire_in: 1 month
+    expose_as: 'Code Coverage'
+    paths:
+    - 'base64c-coverage/'
+
+## Release creation ##############################################################
+# TODO
