@@ -1,4 +1,4 @@
-ACLOCAL_AMFLAGS = -I m4
+ACLOCAL_AMFLAGS = -I .m4
 
 lib_LTLIBRARIES = libbase64c.la
 
@@ -11,6 +11,10 @@ pkgconfig_DATA = base64c.pc
 
 
 linted_files = $(libbase64c_la_SOURCES) $(include_HEADERS)
+if ENABLE_LINTERS
 include $(srcdir)/lint.am
+endif
 
+if ENABLE_TESTS
 include $(srcdir)/tests/Makefile.am
+endif

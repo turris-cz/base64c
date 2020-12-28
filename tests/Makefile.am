@@ -5,13 +5,16 @@ check_PROGRAMS = %reldir%/unittests
 	%reldir%/unittests.c \
 	%reldir%/base64c.c
 %canon_reldir%_unittests_CFLAGS = \
+	-isystem %reldir%/.. \
 	$(CHECK_FLAGS)
 %canon_reldir%_unittests_LDADD = \
 	$(builddir)/libbase64c.la \
 	$(CHECK_LIBS)
 
 
-LOG_DRIVER = env AM_TAP_AWK='$(AWK)' $(SHELL) $(srcdir)/aux/tap-driver.sh
+LOG_DRIVER = \
+	env AM_TAP_AWK='$(AWK)' TEST_OUTPUT_TAP="/dev/stdout" \
+	'$(SHELL)' '$(srcdir)/.aux/tap-driver.sh'
 
 ## Valgrind
 VALGRIND_memcheck_FLAGS = \

@@ -6,7 +6,9 @@
 *.lo
 *.pc
 .libs
-*.gperf.c
+base64c-*.tar.gz
+base64c-*.tar.xz
+base64c-*.zip
 
 # Test outputs
 tests/unittests
@@ -15,8 +17,8 @@ tests/*.log
 tests/*.trs
 
 ## Autotools
-/m4
-/aux
+/.m4
+/.aux
 # http://www.gnu.org/software/automake
 Makefile
 Makefile.in

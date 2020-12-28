@@ -20,6 +20,7 @@
  */
 #include <check.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 void base64c_tests(Suite*);
 
@@ -30,7 +31,12 @@ int main(void) {
 	base64c_tests(suite);
 
 	SRunner *runner = srunner_create(suite);
-	srunner_set_tap(runner, "/dev/stdout");
+	char *test_output_tap = getenv("TEST_OUTPUT_TAP");
+	if (test_output_tap && *test_output_tap != '\0')
+		srunner_set_tap(runner, test_output_tap);
+	char *test_output_xml = getenv("TEST_OUTPUT_XML");
+	if (test_output_xml && *test_output_xml != '\0')
+		srunner_set_xml(runner, test_output_xml);
 	if (getenv("VALGRIND")) // Do not fork with valgrind
 		srunner_set_fork_status(runner, CK_NOFORK);
 
@@ -38,5 +44,5 @@ int main(void) {
 	int failed = srunner_ntests_failed(runner);
 
 	srunner_free(runner);
-	return !!failed;
+	return (bool)failed;
 }

@@ -19,9 +19,9 @@
  * SOFTWARE.
  */
 #include <check.h>
-#include "../base64c.h"
 #include <stdlib.h>
 #include <string.h>
+#include <base64c.h>
 
 
 const char *b64_valid[] = {
