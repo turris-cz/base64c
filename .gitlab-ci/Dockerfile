@@ -9,7 +9,8 @@ RUN \
   apt-get -y install --no-install-recommends \
     autoconf autoconf-archive automake libtool \
     make pkg-config gcc \
-    check cppcheck valgrind \
+    check cppcheck valgrind lcov \
+    zip xz-utils \
     && \
   apt-get clean
 

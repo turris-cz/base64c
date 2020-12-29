@@ -1,4 +1,4 @@
-image: registry.labs.nic.cz/turris/base64c
+image: registry.nic.cz/turris/base64c
 
 stages:
   - build
@@ -28,9 +28,9 @@ dist:
   artifacts:
     expire_in: 1 month
     paths:
-      - 'logc-*.tar.gz'
-      - 'logc-*.tar.xz'
-      - 'logc-*.zip'
+      - 'base64c-*.tar.gz'
+      - 'base64c-*.tar.xz'
+      - 'base64c-*.zip'
 
 ## Test stage ####################################################################
 .test:
@@ -72,7 +72,7 @@ coverage:
     - ./bootstrap
     - ./configure --enable-tests --enable-code-coverage
     - make check-code-coverage V=1
-    - mv 'base64c-*-coverage' 'base64c-coverage'
+    - mv base64c-*-coverage base64c-coverage
   coverage: '/lines\.\.\.\.\.\.: (\d+.\d+%)/'
   artifacts:
     expire_in: 1 month
@@ -81,4 +81,16 @@ coverage:
     - 'base64c-coverage/'
 
 ## Release creation ##############################################################
-# TODO
+release:
+  stage: release
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  rules:
+    - if: '$CI_COMMIT_TAG'
+  needs:
+    - job: dist
+      artifacts: true
+  before_script:
+    - apk update
+    - apk add bash curl
+  script:
+    - .gitlab-ci/release.sh
