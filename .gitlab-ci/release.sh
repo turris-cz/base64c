@@ -2,6 +2,21 @@
 set -eu
 
 VERSION="$(echo "${CI_COMMIT_TAG}" | sed -nE 's/v([0-9]+)\.([0-9]+)\.([0-9]+).*/\1.\2.\3/p')"
+CHANGELOG="$(awk '
+		BEGIN {
+			flag = 0
+		}
+		/^## / {
+			if (!flag) {
+				flag = 1
+				next
+			} else
+				exit
+		}
+		flag {
+			print
+		}
+	' CHANGELOG.md)"
 
 declare -a args
 for dist in base64c-*.tar.gz base64c-*.tar.xz base64c-*.zip; do
@@ -13,5 +28,5 @@ done
 release-cli create \
 	--name "Release ${CI_COMMIT_TAG#v}" \
 	--tag-name "$CI_COMMIT_TAG" \
-	--description "$(sed -n '/^## /,/^## /{n;/^## /q;p}' CHANGELOG.md)" \
+	--description "$CHANGELOG" \
 	"${args[@]}"

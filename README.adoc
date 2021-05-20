@@ -15,12 +15,14 @@ padding but can produce only strings with padding.
 To compile this library you have to run:
 
 ----
- ./bootstrap
  ./configure
  make
 ----
 
 Subsequent installation can be done with `make install`.
+
+When you do not use distribution archive then you have to run initially
+`./bootstrap`.
 
 
 == Usage
