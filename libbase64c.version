@@ -1,0 +1,18 @@
+V0.0 {
+	global:
+		base64_verify;
+		base64_str_verify;
+
+		base64_decode_len;
+		base64_str_decode_len;
+		base64_decode;
+		base64_str_decode;
+		base64_mdecode;
+		base64_str_mdecode;
+
+		base64_encode_len;
+		base64_encode;
+		base64_mencode;
+
+	local: *;
+};

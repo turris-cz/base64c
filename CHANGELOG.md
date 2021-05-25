@@ -5,6 +5,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [Unreleased]
+### Added
+- Linker's version script to limit exported symbols
+
+### Changed
+- Configure now fails if linters are enabled and `cppcheck` is not available
+
+### Fixed
+- Distribution archives
+
+
 ## [0.2.0] - 2020-07-23
 ### Changed
 - `base64_valid` renamed to `bas64_verify` and return value meaning changed

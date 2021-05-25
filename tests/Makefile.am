@@ -5,7 +5,7 @@ check_PROGRAMS = %reldir%/unittests
 	%reldir%/unittests.c \
 	%reldir%/base64c.c
 %canon_reldir%_unittests_CFLAGS = \
-	-isystem %reldir%/.. \
+	-isystem '$(srcdir)' \
 	$(CHECK_FLAGS)
 %canon_reldir%_unittests_LDADD = \
 	$(builddir)/libbase64c.la \
