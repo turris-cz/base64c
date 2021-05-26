@@ -5,6 +5,6 @@ includedir=@includedir@
 
 Name: base64c
 Description: Simple base64 implementation in C
-Version: %version%
+Version: @PACKAGE_VERSION@
 Libs: -L${libdir} -lbase64c
 Cflags: -I${includedir}
