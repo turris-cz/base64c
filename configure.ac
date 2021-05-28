@@ -1,4 +1,4 @@
-AC_INIT([base64c], [0.2.0], [packaging@turris.cz])
+AC_INIT([base64c], [0.2.1], [packaging@turris.cz])
 AC_CONFIG_MACRO_DIRS([.m4])
 AC_CONFIG_AUX_DIR([.aux])
 
